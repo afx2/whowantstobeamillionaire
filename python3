@@ -1,0 +1,1077 @@
+''' Created on Saturday October, 17th 4.00pm 2020'''
+
+
+def game():
+    #Description
+
+    print('*' *40)
+    print (f'''    Who Wants to Be a Millionaire? is a quiz competition 
+    where contestants have to correctly answer a series of multiple-choice questions
+    in order to advance to the next level / question.
+    There are 4 questions in total and each question has no time limit. 
+    Contestants also get three Lifelines to assist them if they get stuck on a particular question.
+
+    Lifelines are:
+    50:50 = will drop 2 wrong answers, giving the contestant a 50% chance of answering correctly
+    Change Question =  replaces the current question with another one
+    Summon the Genie =  the summoned Genie will disclose the correct answer of the current question
+
+    Contestants can use a single lifeline only once during the game.
+
+    If the contestant gives a wrong answer, the contestant loses and the game stops.
+    If the contestant answers correctly to all four questions he wins 1 million Python Dollar,
+    becoming the new Python Millionaire.
+
+    Let's go on with the first question...
+    Good Luck!''')
+    print('*' *40)
+    
+    #taking time from printing everything in once for improving user experience
+    input(prompt= 'Whenever you are ready to start, press enter ')
+
+    #Creating a dictionary of lifelines
+    lifeline = {'a': '50:50', 'b' : 'Change Question', 'c' :  'Summon the Genie'}
+    lifeline_num = 3
+
+    #Changed  question
+    special_answer = 'd'
+    changed_question = '''How many World Cup tournaments has the Italian National Football team won?
+    a. 0
+    b. 1
+    c. 2
+    d. 4'''
+
+    
+    #creating prizes
+    prize = ['50 000','100 000','500 000','1 000 000']
+    
+    #fail function
+    from sys import exit
+    def fail():
+        replay = '' 
+                           
+        #loop back in case answer differ than yes or no                   
+        while replay != 'yes' or replay != 'y' or replay != 'no' or replay != 'n':
+            
+            replay = str.lower(input (prompt= 'You lost. Wanna try again? Enter yes or no: '))
+                           
+            if replay =='yes' or replay == 'y': 
+                print ('Good Luck!')
+                game()
+                break
+                           
+            elif replay == 'no' or replay == 'n' :
+                exit()
+                break
+        
+            else:
+                print ('Please enter yes or no')
+                continue
+            
+
+
+    ####Question 1
+
+    answer1 = 'b'
+    lifeline_choice1= ''
+
+    print()
+    print ( 'Question #1\n')
+    print(f'Prize: {prize[0]} Python Dollar\n')
+    print('''Which of the following is the capial city of the U.S. state of California?: 
+             a. San Francisco
+             b. Sacramento
+             c. Los Angeles
+             d. Rome''')
+
+    #space for design
+    print()
+
+    ##setting up the lifelines' commands ##
+
+    #if statement for more than 1 lifelines - plural sentence
+    if lifeline_num >1 :
+      print(f'You have {lifeline_num} available lifelines. Do you want to use a hint?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn = ''
+      while lifeline_yn != 'yes' or lifeline_yn != 'y' or lifeline_yn != 'no' or lifeline_yn != 'n':
+        lifeline_yn = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn == 'yes' or lifeline_yn == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice#
+          lifeline_choice1= ''
+
+        #loop back in case the contestant inputs something different than the name of the lifeline
+        #in the conditional statements used the opposite sign tof the while so that Python can get to else and loop back
+        #in case of a wrong input
+          while lifeline_choice1 != '50' or lifeline_choice1 != '50:50' or lifeline_choice1 != '5050' or lifeline_choice1 != 'change' \
+            or lifeline_choice1 != 'question' or lifeline_choice1 != 'change question' or \
+            lifeline_choice1 != 'genie' or lifeline_choice1 != 'summon' or lifeline_choice1 != 'summon the genie':
+
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice1 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+
+              #if player chooses 50:50
+              if lifeline_choice1 == '50' or lifeline_choice1 == '50:50' or lifeline_choice1 == '5050':
+                del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                print('You have chosen 50:50! This is your question now:\n')
+                print('''Which of the following is the capial city of the U.S. state of California?: 
+             a. San Francisco
+             b. Sacramento''')
+                break
+
+
+              #player chooses to change question
+              elif lifeline_choice1 == 'change' or lifeline_choice1 == 'question' or lifeline_choice1 == 'change question':
+                del lifeline['b']
+                print('You have chosen Change Question! This is your question now:\n')
+                print(changed_question)
+                break
+
+
+              #player chooses to summon the Genie
+              elif lifeline_choice1 == 'genie' or lifeline_choice1 == 'summon' or lifeline_choice1 == 'summon the genie':
+                del lifeline['c'] 
+                print('You have chosen to Summon the Genie!\n')
+                print(u'\U0001F9DE' *40 )
+                print()
+                print(f'''Hi! I am the Genie, I know everything of this world. 
+                The answer is {answer1}!
+                Good Luck!''')
+                print()
+                print(u'\U0001F9DE'* 40)
+                break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                continue
+                break
+          break
+        elif lifeline_yn == 'no' or lifeline_yn == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+
+    #answering the question
+    player_answer1 = ''
+
+    #if the contestant uses the 50:50 lifeline the possible answers would be only 2
+
+    if (lifeline_yn == 'yes' or lifeline_yn == 'y') and '50' in lifeline_choice1:
+
+        #looping back the contestant if he answers diferently than a or b
+        while player_answer1 != 'a' or player_answer1 != 'b':
+            player_answer1 = str.lower(input(prompt= ' Enter your answer here. Please answer with a or b: '))
+
+            #checking the rightness of the contestant's answer    
+            if player_answer1 == 'a' or player_answer1 == 'b':
+                if player_answer1 == answer1:
+                    print(f'''\n That is the correct answer. Congratulations!
+                    You have just won {prize[0]} Python Dollar.
+                    Let's go to the next question...''')
+                    break
+                else:
+                    print()
+                    fail()
+                    break
+            else:
+                continue
+                break
+
+
+    else:    
+        #looping back in case the player inserts something that is not the answer
+        while player_answer1 != 'a' or player_answer1 != 'b' or player_answer1 != 'c' or player_answer1 != 'd':
+            #input the answer
+            player_answer1 = str.lower(input(prompt= ' Enter your answer here. Please answer with an a, b, c, or d.: '))
+
+            #this line is needed so we can loop back with continue in case the player inputs something different than a/b/c/d
+            # but especially, we can check if the answer that the player has given is not a mispelling and it is right or wrong.
+
+            #check the answer in case the player had chosen to use a lifeline
+            if lifeline_yn == 'y' or lifeline_yn == 'yes':
+                if player_answer1 == 'a' or player_answer1 == 'b' or player_answer1 == 'c' or player_answer1 == 'd':
+
+                  #check if the answer is right, if the player chose to use the Change Question lifeline
+                  if 'change' in lifeline_choice1 or 'question' in lifeline_choice1:
+                    if player_answer1 == special_answer:
+                      print(f'''\n That is the correct answer. Congratulations!
+                      You have just won {prize[0]} Python Dollar
+                      Let's go to the next question...''')
+                      break
+
+                  #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                    else:
+                      print()
+                      fail()
+                      break
+
+                  #check if the answer is right if player used one of the two other lifelines
+                  elif 'change' not in lifeline_choice1 or 'question' not in lifeline_choice1:
+                      if player_answer1 == answer1:
+                          print(f'''\n That is the correct answer. Congratulations!
+                          You have just won {prize[0]} Python Dollar
+                          Let's go to the next question...''')
+                          break
+
+                      #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                      else:
+                          print()
+                          fail()
+                          break
+
+
+                #looping the function until the contestant inserts the answer with an a,b,c, or d
+                else:
+                  continue
+                  break
+
+            #if player has not used any lifeline
+            elif lifeline_yn == 'n' or lifeline_yn =='no':
+                if player_answer1 == 'a' or player_answer1 == 'b' or player_answer1 == 'c' or player_answer1 == 'd': 
+                  #check if the answer is right
+                  if player_answer1 == answer1:
+                    print(f'''\n That is the correct answer. Congratulations!
+                    You have just won {prize[0]} Python Dollar
+                    Let's go to the next question...''')
+                    break
+
+                    #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                  else:
+                    print()
+                    fail()
+                    break
+
+                else:
+                  continue
+                  break
+
+
+
+
+
+
+    ####Question 2
+    
+
+    answer2 = 'a'
+    lifeline_choice2= ''
+    
+    print()
+    print('\U0001F911'*40)
+    
+    #taking time from printing everything in once for improving user experience
+    input(prompt= 'Whenever you are ready for Question 2, press enter \n')
+    
+    print ( 'Question #2\n')
+    print(f'Prize: {prize[1]} Python Dollar\n')
+    print('''Who is the historical Capitan of Juventus Football Club, winner of a World Cup,
+    and known as "Pinturiccho" like the Renaissance artist?
+    a. Alessandro Del Piero
+    b. David Trezeguet
+    c. Fabio Cannavaro
+    d. Cristiano Ronaldo''')
+
+    #space for design
+    print()
+
+
+    ##setting up the lifelines' commands ##
+
+    #if statement for more than 1 lifelines - plural sentence
+    if lifeline_num >1 :
+      print(f'You have {lifeline_num} available lifelines. Do you want to use a hint?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn2 = ''
+      while lifeline_yn2 != 'yes' or lifeline_yn2 != 'y' or lifeline_yn2 != 'no' or lifeline_yn2 != 'n':
+        lifeline_yn2 = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn2 == 'yes' or lifeline_yn2 == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice#
+          lifeline_choice2= ''
+          while lifeline_choice2 != '50' or lifeline_choice2 != '50:50' or lifeline_choice2 != '5050' or lifeline_choice2 != 'change' \
+            or lifeline_choice2 != 'question' or lifeline_choice2 != 'change question' or \
+            lifeline_choice2 != 'genie' or lifeline_choice2 != 'summon' or lifeline_choice2 != 'summon the genie':
+
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice2 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+              #while loop to avoid that the player uses a lifeline more than 1 time
+              while lifeline_choice2 in lifeline_choice1:
+                    lifeline_choice2 = str.lower(input(prompt= 'You cannot use it twice. Enter the exact name of the lifeline chosen: '))
+                    print()
+                    continue
+
+
+              #if player chooses 50:50
+              if lifeline_choice2 == '50' or lifeline_choice2 == '50:50' or lifeline_choice2 == '5050':
+                  del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                  print('You have chosen 50:50! This is your question now:\n')
+                  print('''Who is the historical Capitan of Juventus Football Club, winner of a World Cup,
+                  and named "Pinturiccho" like the Renaissance artist?
+                  a. Alessandro Del Piero
+                  d. Cristiano Ronaldo''')
+                  break
+
+
+              #player chooses to change question
+              elif lifeline_choice2 == 'change' or lifeline_choice2 == 'question' or lifeline_choice2 == 'change question':
+                  del lifeline['b']
+                  print('You have chosen Change Question! This is your question now:\n') 
+                  print(changed_question)
+                  break
+
+
+              #player chooses to summon the Genie 
+              elif lifeline_choice2 == 'genie' or lifeline_choice2 == 'summon' or lifeline_choice2 == 'summon the genie':
+                  del lifeline['c'] 
+                  print('You have chosen to Summon the Genie!\n')
+                  print(u'\U0001F9DE' *40 )
+                  print()
+                  print(f'''Hi! I am the Genie, I know everything of this world. 
+                  The answer is {answer2}!
+                  Good Luck!''')
+                  print()
+                  print(u'\U0001F9DE'* 40)
+                  break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                  print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                  continue
+                  break
+          break
+        elif lifeline_yn2 == 'no' or lifeline_yn2 == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+
+
+
+    #answering question 2
+    player_answer2 = ''
+    #looping back in case the player inserts something that is not the answer
+    while player_answer2 != 'a' or player_answer2 != 'b' or player_answer2 != 'c' or player_answer2 != 'd':
+        #input the answer
+        player_answer2 = str.lower(input(prompt= ' Enter your answer here. Please answer with an a, b, c, or d.: '))
+
+        #this line is needed so we can loop back with continue in case the player inputs something different than a/b/c/d
+        # but especially, we can check if the answer that the player has given is not a mispelling and it is right or wrong.
+
+        #check the answer in case the player had chosen to use a lifeline
+        if lifeline_yn2 == 'y' or lifeline_yn2 == 'yes':
+            if player_answer2 == 'a' or player_answer2 == 'b' or player_answer2 == 'c' or player_answer2 == 'd':
+
+              #check if the answer is right, if the player chose to use the Change Question lifeline
+              if 'change' in lifeline_choice2 or 'question' in lifeline_choice2:
+                if player_answer2 == special_answer:
+                  print(f'''\n That is the correct answer. Congratulations!
+                  You have just won {prize[1]} Python Dollar
+                  Let's go to the next question...''')
+                  break
+
+              #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                else:
+                  print()
+                  fail()
+                  break
+
+              #check if the answer is right if player used one of the two other lifelines
+              if player_answer2 == answer2:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[1]} Python Dollar
+                Let's go to the next question...''')
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+
+            else:
+              continue
+              break
+
+        #if player has not used any lifeline
+        elif lifeline_yn2 == 'n' or lifeline_yn2 =='no':
+            if player_answer2 == 'a' or player_answer2 == 'b' or player_answer2 == 'c' or player_answer2 == 'd': 
+              #check if the answer is right
+              if player_answer2 == answer2:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[1]} Python Dollar
+                Let's go to the next question...''')
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+            else:
+              continue
+              break
+
+
+
+
+
+
+
+    ###Question 3
+
+
+    answer3 = 'c'
+    lifeline_choice3=''
+
+    print()
+    print('\U0001F911'*40)
+    print()
+    
+            #taking time from printing everything in once for improving user experience
+    input(prompt= 'Whenever you are ready for Question 3, press enter ')
+    
+    print ( 'Question #3\n')
+    print(f'Prize: {prize[2]} Python Dollar\n')
+    print('''What made Cardi B became viral on Tik Tok in March 2020?
+    a. Her new album
+    b. Her new outfit on Vogue
+    c. The way she said "coronavirus"
+    d. Her collaboartion with Pantene''')
+
+    #space for design
+    print()
+
+
+    ##setting up the lifelines' commands ##
+    #if statement for more than 1 lifelines - plural sentence
+    if lifeline_num >1 :
+      print(f'You have {lifeline_num} available lifelines. Do you want to use a hint?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn3 = ''
+      while lifeline_yn3 != 'yes' or lifeline_yn3 != 'y' or lifeline_yn3 != 'no' or lifeline_yn3 != 'n':
+        lifeline_yn3 = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn3 == 'yes' or lifeline_yn3 == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice#
+          lifeline_choice3= ''
+          while lifeline_choice3 != '50' or lifeline_choice3 != '50:50' or lifeline_choice3 != '5050' or lifeline_choice3 != 'change' \
+            or lifeline_choice3 != 'question' or lifeline_choice3 != 'change question' or \
+            lifeline_choice3 != 'genie' or lifeline_choice3 != 'summon' or lifeline_choice3 != 'summon the genie':
+
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice3 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+              #while loop to avoid that the player uses a lifeline more than 1 time
+              while lifeline_choice3 in lifeline_choice2 or lifeline_choice3 in lifeline_choice1:
+                    lifeline_choice3 = str.lower(input(prompt= 'You cannot use it twice. Enter the exact name of the lifeline chosen: '))
+                    print()
+                    continue
+
+
+              #if player chooses 50:50
+              if lifeline_choice3 == '50' or lifeline_choice3 == '50:50' or lifeline_choice3 == '5050':
+                  del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                  print('You have chosen 50:50! This is your question now:\n')
+                  print('''What made Cardi B became viral on Tik Tok in March 2020?
+                  c. The way she said "coronavirus"
+                  d. Her collaboartion with Pantene''')
+                  break
+
+
+              #player chooses to change question
+              elif lifeline_choice3 == 'change' or lifeline_choice3 == 'question' or lifeline_choice3 == 'change question':
+                  del lifeline['b']
+                  print('You have chosen Change Question! This is your question now:\n') 
+                  print(changed_question)
+                  break
+
+
+              #player chooses to summon the Genie
+              elif lifeline_choice3 == 'genie' or lifeline_choice3 == 'summon' or lifeline_choice3 == 'summon the genie':
+                  del lifeline['c'] 
+                  print('You have chosen to Summon the Genie!\n')
+                  print(u'\U0001F9DE' *40 )
+                  print()
+                  print(f'''Hi! I am the Genie, I know everything of this world. 
+                  The answer is {answer3}!
+                  Good Luck!''')
+                  print()
+                  print(u'\U0001F9DE'* 40)
+                  break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                  print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                  continue
+                  break
+          break
+        elif lifeline_yn3 == 'no' or lifeline_yn3 == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+    #if only 1 lifeline left - singular sentence
+    elif lifeline_num == 1:
+      print(f'You have only {lifeline_num} lifeline left. Do you want to use it?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn3 = ''
+      while lifeline_yn3 != 'yes' or lifeline_yn3 != 'y' or lifeline_yn3 != 'no' or lifeline_yn3 != 'n':
+        lifeline_yn3 = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn3 == 'yes' or lifeline_yn3 == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice
+          lifeline_choice3= ''
+        #loop back in case the contestant inputs something different than the name of the lifeline
+        #in the conditional statements used the opposite sign tof the while so that Python can get to else and loop back
+        #in case of a wrong input
+          while lifeline_choice3 != '50' or lifeline_choice3 != '50:50' or lifeline_choice3 != '5050' or lifeline_choice3 != 'change' \
+            or lifeline_choice3 != 'question' or lifeline_choice3 != 'change question' or \
+            lifeline_choice3 != 'genie' or lifeline_choice3 != 'summon' or lifeline_choice3 != 'summon the genie':
+
+
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice3 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+
+              #while loop to avoid that the player uses a lifeline more than 1 time
+              while lifeline_choice3 in lifeline_choice2 or lifeline_choice3 in lifeline_choice1:
+                    lifeline_choice3 = str.lower(input(prompt= 'You cannot use it twice. Enter the exact name of the lifeline chosen: '))
+                    print()
+                    continue
+  
+
+
+              #if player chooses 50:50
+              if lifeline_choice3 == '50' or lifeline_choice3 == '50:50' or lifeline_choice3 == '5050':
+                del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                print('You have chosen 50:50! This is your question now:\n')
+                print('''What made Cardi B became viral on Tik Tok in March 2020?
+                c. The way she said "coronavirus"
+                d. Her collaboartion with Pantene''')
+                break
+
+
+              #player chooses to change question
+              elif lifeline_choice3 == 'change' or lifeline_choice3 == 'question' or lifeline_choice3 == 'change question':
+                del lifeline['b']
+                print('You have chosen Change Question! This is your question now:\n')
+                print(changed_question)
+                break
+
+
+              #player chooses to summon the Genie
+              elif lifeline_choice3 == 'genie' or lifeline_choice3 == 'summon' or lifeline_choice3 == 'summon the genie':
+                del lifeline['c']
+                print('You have chosen to Summon the Genie!\n')
+                print(u'\U0001F9DE'* 40)
+                print()
+                print(f'''Hi! I am the Genie, I know everything of this world. 
+                The answer is {answer3}!
+                Good Luck!''')
+                print()
+                print(u'\U0001F9DE'* 40)
+                break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                continue
+                break
+          break
+
+        elif lifeline_yn3 == 'no' or lifeline_yn3 == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+    #if player has no lifelines left
+    else:
+        print ('You have no lifelines left! You must answer according to your knowledge now.')    
+
+    #answering question 3
+    player_answer3 = ''
+    #looping back in case the player inserts something that is not the answer
+    while player_answer3 != 'a' or player_answer3 != 'b' or player_answer3 != 'c' or player_answer3 != 'd':
+        #input the answer
+        player_answer3 = str.lower(input(prompt= ' Enter your answer here. Please answer with an a, b, c, or d.: '))
+
+        #this line is needed so we can loop back with continue in case the player inputs something different than a/b/c/d
+        # but especially, we can check if the answer that the player has given is not a mispelling and it is right or wrong.
+
+        #check the answer in case the player had chosen to use a lifeline
+        if lifeline_yn3 == 'y' or lifeline_yn3 == 'yes':
+            if player_answer3 == 'a' or player_answer3 == 'b' or player_answer3 == 'c' or player_answer3 == 'd':
+
+              #check if the answer is right, if the player chose to use the Change Question lifeline
+              if 'change' in lifeline_choice3 or 'question' in lifeline_choice3:
+                if player_answer3 == special_answer:
+                  print(f'''\n That is the correct answer. Congratulations!
+                  You have just won {prize[2]} Python Dollar
+                  Let's go to the next question...''')
+                  break
+
+              #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                else:
+                  print()
+                  fail()
+                  break
+
+              #check if the answer is right if player used one of the two other lifelines
+              if player_answer3 == answer3:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[2]} Python Dollar
+                Let's go to the next question...''')
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+
+            else:
+              continue
+              break
+
+        #if player has not used any lifeline
+        elif lifeline_yn3 == 'n' or lifeline_yn3 =='no':
+            if player_answer3 == 'a' or player_answer3 == 'b' or player_answer3 == 'c' or player_answer3 == 'd': 
+              #check if the answer is right
+              if player_answer3 == answer3:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[2]} Python Dollar
+                Let's go to the next question...''')
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+            else:
+              continue
+              break
+
+
+
+
+
+
+    ####Question 4
+
+
+    answer4 = 'c'
+    lifeline_choice4= ''
+
+    print()
+    print('\U0001F911'*40)
+    print()
+    
+            #taking time from printing everything in once for improving user experience
+    input(prompt= 'Whenever you are ready for Question 4, press enter ')
+    
+    print ( 'Final question: Question #4 \n')
+    print(f'Prize: {prize[3]} Python Dollar\n')
+    print('''What is banned in public places in Florida after 6 pm on a Thursday?
+    a. Swim in the Central Lake
+    b. Hunting alligators
+    c. Farting in public
+    d. To say "Go Lakers!" ''')
+
+    #space for design
+    print()
+
+
+    ##setting up the lifelines' commands ##
+    #if statement for more than 1 lifelines - plural sentence
+    if lifeline_num >1 :
+      print(f'You have {lifeline_num} available lifelines. Do you want to use a hint?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn4 = ''
+      while lifeline_yn4 != 'yes' or lifeline_yn4 != 'y' or lifeline_yn4 != 'no' or lifeline_yn4 != 'n':
+        lifeline_yn4 = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn4 == 'yes' or lifeline_yn4 == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice#
+          lifeline_choice4= ''
+          #loop back in case the contestant inputs something different than the name of the lifeline
+        #in the conditional statements used the opposite sign tof the while so that Python can get to else and loop back
+        #in case of a wrong input
+          while lifeline_choice4 != '50' or lifeline_choice4 != '50:50' or lifeline_choice4 != '5050' or lifeline_choice4 != 'change' \
+            or lifeline_choice4 != 'question' or lifeline_choice4 != 'change question' or \
+            lifeline_choice4 != 'genie' or lifeline_choice4 != 'summon' or lifeline_choice4 != 'summon the genie':  
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice4 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+              #while loop to avoid that the player uses a lifeline more than 1 time
+              while lifeline_choice4 in lifeline_choice2 or lifeline_choice4 in lifeline_choice1 \
+                or lifeline_choice4 in lifeline_choice3:
+                    lifeline_choice4 = str.lower(input(prompt= 'You cannot use it twice. Enter the exact name of the lifeline chosen: '))
+                    print()
+                    continue
+
+
+              #if player chooses 50:50
+              if lifeline_choice4 == '50' or lifeline_choice4 == '50:50' or lifeline_choice4 == '5050':
+                  del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                  print('You have chosen 50:50! This is your question now:\n')
+                  print('''What is banned in public places in Florida after 6 pm on a Thursday?
+                  c. Farting
+                  d. To say "Go Lakers!" ''')
+                  break
+
+
+              #player chooses to change question
+              elif lifeline_choice4 == 'change' or lifeline_choice4 == 'question' or lifeline_choice4 == 'change question':
+                  del lifeline['b']
+                  print('You have chosen Change Question! This is your question now:\n') 
+                  print(changed_question)
+                  break
+
+
+              #player chooses to summon the Genie 
+              elif lifeline_choice4 == 'genie' or lifeline_choice4 == 'summon' or lifeline_choice4 == 'summon the genie':
+                  del lifeline['c'] 
+                  print('You have chosen to Summon the Genie!\n')
+                  print(u'\U0001F9DE' *40 )
+                  print()
+                  print(f'''Hi! I am the Genie, I know everything of this world. 
+                  The answer is {answer4}!
+                  Good Luck!''')
+                  print()
+                  print(u'\U0001F9DE'* 40)
+                  break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                  print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                  continue
+                  break
+          break
+        elif lifeline_yn4 == 'no' or lifeline_yn4 == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+
+    #if only 1 lifeline left - singular sentence
+    elif lifeline_num == 1:
+      print(f'You have only {lifeline_num} lifeline left. Do you want to use it?')
+
+      #storing the answer in lifeline_yn (yes or not)
+      lifeline_yn4 = ''
+      while lifeline_yn4 != 'yes' or lifeline_yn4 != 'y' or lifeline_yn4 != 'no' or lifeline_yn4 != 'n':
+        lifeline_yn4 = str.lower(input(prompt = 'Enter yes or not: '))
+
+        if lifeline_yn4 == 'yes' or lifeline_yn4 == 'y':
+
+          #decreasing the number of lifelines available
+          lifeline_num = lifeline_num -1
+
+          #design line break
+          print()
+
+          #the lifeline the player chooses stored in lifeline_choice
+          lifeline_choice4= ''
+          #loop back in case the contestant inputs something different than the name of the lifeline
+        #in the conditional statements used the opposite sign tof the while so that Python can get to else and loop back
+        #in case of a wrong input
+          while lifeline_choice4 != '50' or lifeline_choice4 != '50:50' or lifeline_choice4 != '5050' or lifeline_choice4 != 'change' \
+            or lifeline_choice4 != 'question' or lifeline_choice4 != 'change question' or \
+            lifeline_choice4 != 'genie' or lifeline_choice4 != 'summon' or lifeline_choice4 != 'summon the genie':
+
+              #print the remaining lifelines
+              print('*' *40)
+              print()
+              print(f'What lifeline would you like to use?: \n')
+              for life_value in lifeline:
+                print(lifeline[life_value])
+
+              #decoration
+              print()
+              print('*' *40)
+              print()
+
+
+              #making the player choose the lifeline
+              lifeline_choice4 = str.lower(input(prompt= 'Enter the exact name of the lifeline chosen: '))
+              print()
+
+
+              #while loop to avoid that the player uses a lifeline more than 1 time
+              while lifeline_choice4 == lifeline_choice1 or lifeline_choice4 == lifeline_choice2 or lifeline_choice4 == lifeline_choice3:
+                    lifeline_choice4 = str.lower(input(prompt= 'You cannot use it twice. Enter the exact name of the lifeline chosen: '))
+                    print()
+                    continue
+  
+
+
+              #if player chooses 50:50
+              if lifeline_choice4 == '50' or lifeline_choice4 == '50:50' or lifeline_choice4 == '5050':
+                del lifeline['a']  #it is possible to use a lifeline only one: deleting from the lifeline dectionary - not available
+                print('You have chosen 50:50! This is your question now:\n')
+                print('''What is banned in public places in Florida after 6 pm on a Thursday?
+                c. Farting
+                d. To say "Go Lakers!" ''')
+                break
+
+
+              #player chooses to change question
+              elif lifeline_choice4 == 'change' or lifeline_choice4 == 'question' or lifeline_choice4 == 'change question':
+                del lifeline['b']
+                print('You have chosen Change Question! This is your question now:\n')
+                print(changed_question)
+                break
+
+
+              #player chooses to summon the Genie
+              elif lifeline_choice4 == 'genie' or lifeline_choice4 == 'summon' or lifeline_choice4 == 'summon the genie':
+                del lifeline['c']
+                print('You have chosen to Summon the Genie!\n')
+                print(u'\U0001F9DE'* 40)
+                print()
+                print(f'''Hi! I am the Genie, I know everything of this world. 
+                The answer is {answer4}!
+                Good Luck!''')
+                print()
+                print(u'\U0001F9DE'* 40)
+                break
+
+
+              #else statement that makes this loop repeat from the lifeline choice
+              else:
+                print('You have entered something else. Please enter the exact lifeline name next time. \n')
+                continue
+                break
+          break
+
+        elif lifeline_yn4 == 'no' or lifeline_yn4 == 'n':
+          print ('All right! Let\'s go on \n')
+          break
+
+        else:
+          print('You have entered something else. Please enter yes or no. \n')
+          continue
+          break
+
+
+    #if player has no lifelines left
+    else:
+        print ('You have no lifelines left! You must answer according to your knowledge now.')    
+
+
+    #answering question 4
+    player_answer4 = ''
+    #looping back in case the player inserts something that is not the answer
+    while player_answer4 != 'a' or player_answer4 != 'b' or player_answer4 != 'c' or player_answer4 != 'd':
+        #input the answer
+        player_answer4 = str.lower(input(prompt= ' Enter your answer here. Please answer with an a, b, c, or d.: '))
+
+        #this line is needed so we can loop back with continue in case the player inputs something different than a/b/c/d
+        # but especially, we can check if the answer that the player has given is not a mispelling and it is right or wrong.
+
+        #check the answer in case the player had chosen to use a lifeline
+        if lifeline_yn4 == 'y' or lifeline_yn4 == 'yes':
+            if player_answer4 == 'a' or player_answer4 == 'b' or player_answer4 == 'c' or player_answer4 == 'd':
+
+              #check if the answer is right, if the player chose to use the Change Question lifeline
+              if 'change' in lifeline_choice4 or 'question' in lifeline_choice4:
+                if player_answer4 == special_answer:
+                  print(f'''\n That is the correct answer. Congratulations!
+                  You have just won {prize[3]} Python Dollar
+                  Let's go to the next question...''')
+                  break
+
+              #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+                else:
+                  print()
+                  fail()
+                  break
+
+              #check if the answer is right if player used one of the two other lifelines
+              if player_answer4 == answer4:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[3]} Python Dollar
+                Let's go to the next question...''')
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+
+            else:
+              continue
+              break
+
+        #if player has not used any lifeline
+        elif lifeline_yn4 == 'n' or lifeline_yn4 =='no':
+            if player_answer4 == 'a' or player_answer4 == 'b' or player_answer4 == 'c' or player_answer4 == 'd': 
+              #check if the answer is right
+              if player_answer4 == answer4:
+                print(f'''\n That is the correct answer. Congratulations!
+                You have just won {prize[3]} Python Dollar''')
+                print()
+                print('\U0001F4B0'*40)
+                print('YOU ARE THE NEW PYTHON MILLIONAIRE!!!')
+                print('\U0001F4B0'*40)
+                break
+
+                #if the answer is  a, b, c, or d, and it is different than the correct answer, the player lost
+              else:
+                print()
+                fail()
+                break
+
+            else:
+              continue
+              break
+
+game()
+
